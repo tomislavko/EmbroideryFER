@@ -7,13 +7,13 @@
 
 <h2>Create Order</h2>
 
-<form asp-action="CreateOrder">
+<form asp-route-return="" asp-action="CreateOrder2">
     <div class="form-horizontal">
         <h4>Order</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="OrderId"/>
-        <input type="hidden" asp-for="ShopppingCartId"/>
+        <input type="hidden" asp-for="ShoppingCartId"/>
         <div class="form-group">
             <label asp-for="FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-10">

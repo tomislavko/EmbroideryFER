@@ -15,11 +15,26 @@ namespace WebApp.Models
             OrderId = Guid.NewGuid();
            
         }
+        public Order(Guid cartId, DateTime orderDate, string firstName, string lastName, string adress, string city, string postalCode, string country, string phoneNumber, string emailAdress, Decimal total)
+        {
+            OrderId = Guid.NewGuid();
+            ShoppingCartId = cartId;
+            OrderDate = orderDate;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = adress;
+            City = city;
+            PostalCode = postalCode;
+            Country = country;
+            Phone = phoneNumber;
+            Email = emailAdress;
+            Total = total;
+        }
 
         public Guid OrderId { get; set; }
 
 
-        public Guid ShopppingCartId { get; set; }
+        public Guid ShoppingCartId { get; set; }
 
         [BindNever]
         public DateTime OrderDate { get; set; }

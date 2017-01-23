@@ -24,7 +24,7 @@ namespace WebApp.Data
 
         public IDbSet<Order> Orders { get; set; }
 
-        public IDbSet<CartProduct> OnlyCartProducts { get; set; }
+        public IDbSet<CartProduct> CartProducts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace WebApp.Data
             modelBuilder.Entity<User>().Property(s => s.Email).IsRequired();
   
             modelBuilder.Entity<Order>().HasKey(s => s.OrderId);
-            modelBuilder.Entity<Order>().Property(s => s.ShopppingCartId).IsRequired();
+            modelBuilder.Entity<Order>().Property(s => s.ShoppingCartId).IsRequired();
             modelBuilder.Entity<Order>().Property(s => s.OrderDate).IsOptional();
             modelBuilder.Entity<Order>().Property(s => s.FirstName).IsRequired();
             modelBuilder.Entity<Order>().Property(s => s.LastName).IsRequired();

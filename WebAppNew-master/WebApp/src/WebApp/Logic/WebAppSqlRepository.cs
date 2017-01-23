@@ -316,19 +316,19 @@ namespace WebApp.Logic
             {
                 return true;
             }
-            var prod = cart.CartedProducts.SingleOrDefault(s => s.Product.ProductId == productId);
+            var prod = _context.CartProducts.Where(s => s.Product.ProductId == productId && s.ShoppingCartId == cart.CartId).SingleOrDefault();
             if (prod == null)
             {
                 return false;
             }
             if (all || prod.Quantity <= quantity)
             {
-                cart.CartedProducts.Remove(prod);
-                    _context.SaveChanges();
-                return true;
             }
             prod.Quantity -= quantity;
-            //    _context.SaveChanges();
+            if (prod.Quantity == 0)
+            {
+                _context.CartProducts.Remove(prod);
+            }
             UpdateCart(cart);
             return true;
         }
@@ -340,8 +340,13 @@ namespace WebApp.Logic
             {
                 return;
             }
+            var products = _context.CartProducts.Where(c => c.ShoppingCartId == cart.CartId);
+            if (products != null) foreach (CartProduct product in products)
+            {
 
-            cart.CartedProducts = new List<CartProduct>();
+                    _context.CartProducts.Remove(product);
+            }
+            //cart.CartedProducts = new List<CartProduct>();
             cart.CartedProducts.Clear();
             UpdateCart(cart);
         }
@@ -354,7 +359,7 @@ namespace WebApp.Logic
                 return new List<CartProduct>();
             }
             return
-                _context.OnlyCartProducts.Include(path: s => s.Product)
+                _context.CartProducts.Include(path: s => s.Product)
                     .Where(s => s.ShoppingCartId == cart.CartId)
                     .ToList();
 
@@ -385,7 +390,7 @@ namespace WebApp.Logic
                 return 0;
             }
             decimal price = 0;
-            foreach (CartProduct cartedProduct in cart.CartedProducts)
+            foreach (CartProduct cartedProduct in _context.CartProducts.Where(s => s.ShoppingCartId == cart.CartId))
             {
                 price += cartedProduct.Product.ProductPrice * cartedProduct.Quantity;
             }

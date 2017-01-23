@@ -81,7 +81,7 @@
         @s.Product.ProductDescription
     </p>
     <h3>Quantity: @s.Quantity</h3>
-    <a asp-route-id="@s.Product.ProductId" asp-controller="ShoppingCart" asp-action="Delete" ><h3>Remove</h3></a>
+    <a asp-route-id="@s.Product.ProductId" asp-controller="ShoppingCart" asp-action="Delete">Remove</a>
                                 </div>
                                 </div>
                             </div>
@@ -97,6 +97,7 @@
                 <div class="col-md-12">
                     <h3 class="text-right">
                     Total: @Model.Sum(k => k.Product.ProductPrice * k.Quantity)
+                        <br /> <a asp-route-id="@Model.ElementAt(0).ShoppingCartId" asp-controller="ShoppingCart" asp-action="CreateOrder">Create order</a>
                     </h3>
                 </div>
             </div>

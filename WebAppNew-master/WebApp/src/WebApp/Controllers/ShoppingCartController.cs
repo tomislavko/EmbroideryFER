@@ -83,7 +83,7 @@ namespace WebApp.Controllers
              var order = new Order()
             {
                 Email = me.Email,
-                ShopppingCartId = cartId
+                ShoppingCartId = cartId
             };
             return View(order);
         }
@@ -91,7 +91,7 @@ namespace WebApp.Controllers
         // POST: ShoppingCart/CreateOrder
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateOrder(Order order)
+        public async Task<ActionResult> CreateOrder2(Order order)
         {
 
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace WebApp.Controllers
                         urlService: Url,
                         message: "You don't have any products in your chart!",
                         returnAction: "Index",
-                        returnController: "ShoppinCart"
+                        returnController: "ShoppingCart"
                        ));
                 }
     
@@ -145,8 +145,8 @@ namespace WebApp.Controllers
 
        
         // POST: ShoppingCart/Delete/5
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        //[Microsoft.AspNetCore.Mvc.HttpPost]
+        //[Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(Guid id)
         {
             var user = await GetCurrentUser();
